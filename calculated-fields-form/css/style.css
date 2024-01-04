@@ -372,8 +372,18 @@ textarea {resize: none}
 	#metabox_new_form_area form>div>input:nth-of-type(2){flex:2 0 auto;margin-left:5px;}
 	#metabox_new_form_area form>div>input:nth-of-type(3),
 	#metabox_new_form_area form>div>input:nth-of-type(4){flex:1 0 auto;margin-left:5px;}
-	#metabox_categories_list{width:50%;float:left;}
-	#forms_pagination{width:50%;float:right;text-align:right;clear:right;}
+	#metabox_categories_list{float:left;}
+	#forms_pagination{float:right;text-align:right;clear:right;}
+	[name="calculated-fields-form-category"]{width:300px;}
+}
+
+@media screen AND (max-width:710px) {
+	#metabox_categories_list,
+	#forms_pagination{float:none;, text-align:left;margin:5px 0;}
+	#metabox_categories_list select,
+	#metabox_categories_list input,
+	#forms_pagination select {width:100%;margin:0 0 5px 0 !important;}
+	#forms_pagination {border-top: 1px solid #dcdcde;padding-top:10px;}
 }
 
 /* TABS */
@@ -465,7 +475,7 @@ a.helpfbuilder{font-size:80%;text-decoration:underline;color:#00f;cursor:pointer
 
 .form-builder #tabs label{ font-size:12px !important; display:block;margin-top:10px;}
 
-.ui-state-highlight { height: 65px; line-height: 65px; border-radius:2px; opacity:.7;}
+#fbuilder .ui-state-highlight { height: 65px; line-height: 65px; border-radius:2px; opacity:.7;}
 
 .cff-revisions-container{float:right;padding:10px;}
 .cff-form-name{display:block !important;}

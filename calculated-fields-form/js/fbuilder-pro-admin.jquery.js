@@ -797,7 +797,7 @@
                     var index = ui.item.index('#fieldlist>div');
                     if(0<=index)
                     {
-                        if(ui.item.hasClass('cff-button-drag')) // It is  an new control
+                        if(ui.item.hasClass('cff-button-drag')) // It is a new control
                         {
                             ui.item = $('.'+window['cff_form'].fBuild.addItem(ui.item.data('control'), -3).name);
                         }

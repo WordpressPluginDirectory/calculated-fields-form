@@ -4,7 +4,7 @@ Donate link: http://cff.dwbooster.com
 Tags: form,quote form,contact form,form builder,calculator,calculated,quote calculator,forms,form editor,advanced forms,payment calculator,payment,recurring payment,quote,fields,calculated field,price calculator,email,form design,paypal,equation editor,formula,equation,quote calculator,post,posts,plugin,widget,admin,sidebar,images,image,page,shortcode,products form,woocommerce,addons,layout,session,post,cookie,get,webhook,Dropbox,pdf,language
 Requires at least: 3.0.5
 Tested up to: 6.4
-Stable tag: 1.2.45
+Stable tag: 1.2.46
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -999,6 +999,13 @@ A: Please, follow the steps below:
 
 == Changelog ==
 
+= 1.2.46 =
+
+* Implements a search box to search by form name and content.
+* Configures the PayPal integration deactivated by default.
+* Includes a new option in the Default Settings section to activate/deactivate the PayPal integration (Professional, Developer, and Platinum plugin versions).
+
+
 = 1.2.45 =
 
 * Fixes a minor issue in the RESETFORM operation and Reset button.
@@ -1040,8 +1047,3 @@ A: Please, follow the steps below:
 
 * Implements the RANDOM operation. It allows getting random numbers in a range.
 * Modifies the forms builder dashboard.
-
-= 1.2.38 =
-
-* Fixes an issue in the DATEOBJ operation.
-* Includes some styles to force the browser to print the on/off controls and fields' backgrounds by pressing the Print button or calling the PRINTFORM operation.

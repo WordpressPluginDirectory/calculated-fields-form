@@ -1,5 +1,12 @@
 == Changelog ==
 
+= 1.2.46 =
+
+* Implements a search box to search by form name and content.
+* Configures the PayPal integration deactivated by default.
+* Includes a new option in the Default Settings section to activate/deactivate the PayPal integration (Professional, Developer, and Platinum plugin versions).
+
+
 = 1.2.45 =
 
 * Fixes a minor issue in the RESETFORM operation and Reset button.

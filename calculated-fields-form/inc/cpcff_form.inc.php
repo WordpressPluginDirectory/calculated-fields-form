@@ -123,7 +123,7 @@ if ( ! class_exists( 'CPCFF_FORM' ) ) {
 						'vs_all_texts'                => serialize( $cpcff_default_texts_array ),
 
 						// Paypal settings
-						'enable_paypal'               => CP_CALCULATEDFIELDSF_DEFAULT_ENABLE_PAYPAL,
+						'enable_paypal'               => get_option( 'CP_CALCULATEDFIELDSF_DEFAULT_ENABLE_PAYPAL', CP_CALCULATEDFIELDSF_DEFAULT_ENABLE_PAYPAL ),
 						'paypal_email'                => CP_CALCULATEDFIELDSF_DEFAULT_PAYPAL_EMAIL,
 						'request_cost'                => 'fieldname1',
 						'paypal_product_name'         => CP_CALCULATEDFIELDSF_DEFAULT_PRODUCT_NAME,
