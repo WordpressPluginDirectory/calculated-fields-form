@@ -306,6 +306,31 @@
 		}
     };
 
+	function copyToClipboard(_field, _form, _html){
+		_html = _html || false;
+		if ( ! ( 'ClipboardItem' in window ) ) return;
+        var f = _getField(_field, _form), h;
+		if(f) {
+			h = f.jQueryRef()[_html ? 'html' : 'text']();
+		} else {
+			try {
+				f = $( _field );
+				if ( f.length ) h = f[_html ? 'html' : 'text']();
+			} catch ( err ) {}
+		}
+
+		if(h) {
+			const clipboardItem = new ClipboardItem({'text/html':  new Blob([h],{type: 'text/html'}), 'text/plain': new Blob([h], {type: 'text/plain'})});
+    		navigator.clipboard.write([clipboardItem]).then(
+				_ => { if( 'console' in window ) console.log("clipboard.write() Ok") },
+				error => { if( 'console' in window ) console.log(error) }
+			);
+		}
+	};
+
+    lib.COPYTEXT = lib.copytext = function(_field, _form){ copyToClipboard(_field, _form, false); };
+    lib.COPYHTML = lib.copyhtml = function(_field, _form){ copyToClipboard(_field, _form, true); };
+
     lib.gotopage = lib.GOTOPAGE = lib.goToPage = function(p, f)
     {
         try
@@ -399,7 +424,13 @@
 										$("#fieldlist"+fid+" .pb0").find(".field").removeClass("ignorepb");
 										try
 										{
-											$("#fieldlist"+fid+" .pb0").find(".field")[0].focus();
+											let first_field = $("#fieldlist"+fid+" .pb0").find(".field:eq(0)");
+											if ( first_field.hasClass('hasDatepicker') ) {
+												first_field.datepicker( 'option', 'showOn', 'none' );
+												first_field.focus();
+												first_field.datepicker( 'option', 'showOn', 'focus' );
+												first_field.blur();
+											} else  first_field.focus();
 										}
 										catch(e){}
 									}

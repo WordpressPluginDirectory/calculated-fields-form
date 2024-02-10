@@ -13,11 +13,13 @@
 			title:"",
 			titletag:"P",
 			ftype:"fpopup",
+			_developerNotes:'',
 			fields:[],
 			open_onload:false,
 			open_onclick:'',
 			close_button:true,
 			modal:true,
+			dragging:false,
 			position:'center', // center, top-left, top-right, bottom-left, bottom-right
 			width:'360px',
 			height:'360px',
@@ -30,7 +32,7 @@
 					'<div class="cff-popup-header">'+(this.title.length ? '<' + this.titletag+ ' class="cff-popup-title">'+this.title+'</' + this.titletag+ '>' : '')+
 					(this.close_button ? '<div class="cff-popup-close ui-icon ui-icon-close"></div>' : '')+
 					'</div>'+
-					'<div class="fcontainer">'+$.fbuilder.controls['fcontainer'].prototype.columnsSticker.call(this)+'<label class="collapsed-label">Collapsed ['+this.name+']</label><div class="fieldscontainer"></div></div></div><div class="clearer" /></div>';
+					'<div class="fcontainer">'+$.fbuilder.controls['fcontainer'].prototype.columnsSticker.call(this)+'<span class="developer-note">'+$.fbuilder.htmlEncode(this._developerNotes)+'</span><label class="collapsed-label">Collapsed ['+this.name+']</label><div class="fieldscontainer"></div></div></div><div class="clearer" /></div>';
 				},
 			editItemEvents:function()
 				{
@@ -42,6 +44,7 @@
 							{s:"#sOpenOnclick",e:"change", l:"open_onclick"},
 							{s:"#sTitleTag",e:"change", l:"titletag"},
 							{s:"#sModal",e:"click", l:"modal", f:function(el){return el.is(':checked');}},
+							{s:"#sDragging",e:"click", l:"dragging", f:function(el){return el.is(':checked');}},
 							{s:"#sCloseButton",e:"click", l:"close_button", f:function(el){return el.is(':checked');}},
 							{s:"#sPosition",e:"change", l:"position"},
 							{s:"#sWidth",e:"change keyup", l:"width"},
@@ -66,7 +69,7 @@
 					let me = this;
 					return '<label>Popup Title</label><textarea class="large" name="sTitle" id="sTitle">'+cff_esc_attr(me.title)+'</textarea>'+
 					'<div><label>Title Tag</label><select class="large" id="sTitleTag" name="sTitleTag">'+
-					['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P'].reduce(function(o, t){ return o += '<option value="'+t+'" '+(t == me.titletag ? 'SELECTED' : '')+'>'+t+'</option>';}, '');
+					['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P'].reduce(function(o, t){ return o += '<option value="'+t+'" '+(t == me.titletag ? 'SELECTED' : '')+'>'+t+'</option>';}, '')+'</select>';
 				},
 			showPopupSettings:function()
 				{
@@ -84,6 +87,7 @@
 						return opts;
 					};
 					return '<label><input type="checkbox" name="sModal" id="sModal" '+( me.modal ? "checked" : "" )+'> Modal popup</label>'+
+					'<label><input type="checkbox" name="sDragging" id="sDragging" '+( me.dragging ? "checked" : "" )+'> Allow dragging</label>'+
 					'<label><input type="checkbox" name="sOpenOnload" id="sOpenOnload" '+( me.open_onload ? "checked" : "" )+'> Open on form load</label>'+
 					'<label>Open on-click button</label>'+
 					'<select name="sOpenOnclick" id="sOpenOnclick" class="large">' + getButtons( me.open_onclick ) + '</select>'+

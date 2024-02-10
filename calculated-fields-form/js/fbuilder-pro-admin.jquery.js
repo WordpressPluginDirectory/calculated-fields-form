@@ -409,6 +409,11 @@
 					);
 					editor = wp.codeEditor.initialize( $('#fCustomStyles'), cssEditorSettings );
 					editor.codemirror.on('change', function(cm){ $('#fCustomStyles').val(cm.getValue()).change();});
+					editor.codemirror.on('keydown', function(cm, evt){
+						if ( 'Escape' == evt.key && $('.CodeMirror-hint').length ) {
+							evt.stopPropagation();
+						}
+					});
 
 					$('.cff-editor-extend-shrink').on('click', function(){
 						let e = $(this).closest('.cff-editor-container'),
@@ -528,7 +533,7 @@
 					$('#metabox_form_structure').removeClass('fullscreen');
 				});
 
-				$(document).on('keyup', function(evt){
+				$(document).on('keydown', function(evt){
 					if ( 'Escape' == evt.key ) {
 						if ( $('#cff-advanced-equation-editor:visible').length ) {
 							return;
@@ -1284,6 +1289,11 @@
 					{
 						alert($(this).attr("text"));
 					});
+				$("#sDeveloperNotes").on("keyup", {obj: this}, function(e)
+					{
+						e.data.obj._developerNotes = $(this).val();
+						$.fbuilder.reloadItems( {'field': e.data.obj} );
+					});
 			},
 
 			showSpecialData:function()
@@ -1407,6 +1417,18 @@
 				return $.fbuilder.showSettings.showCsslayout(this.csslayout);
 			},
 
+			showDeveloperNotes:function()
+			{
+				if(typeof this._developerNotes != 'undefined')
+				{
+					return '<hr><label>Developer Notes</label><textarea class="large" name="sDeveloperNotes" id="sDeveloperNotes">'+cff_esc_attr(this._developerNotes)+'</textarea><div class="clearer"><span class="uh">Developer notes. Only visible in the Form Builder</span></div><hr>';
+				}
+				else
+				{
+					return "";
+				}
+			},
+
 			showAllSettings:function()
 			{
 				return this.showFieldType()+this.showTitle()+this.showShortLabel()+this.showName()+this.showSize()+this.showLayout()+this.showFormat()+this.showRange()+this.showRequired()+this.showSpecialData()+this.showEqualTo()+this.showPredefined()+this.showChoice()+this.showUserhelp()+this.showCsslayout();
@@ -1424,7 +1446,7 @@
 
 			showName:function()
 			{
-				return $.fbuilder.showSettings.showName(this.name);
+				return $.fbuilder.showSettings.showName(this.name)+this.showDeveloperNotes();
 			},
 
 			showShortLabel:function()
